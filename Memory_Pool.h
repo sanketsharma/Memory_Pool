@@ -6,13 +6,13 @@
 
 namespace sanket
 {
-    class A
+    class TestType
     {
         public: 
-            A():size(5), array(new char[size])
+            TestType():size(5), array(new char[size])
         {}
 
-            ~A()
+            ~TestType()
             {
                 delete [] array;
             }

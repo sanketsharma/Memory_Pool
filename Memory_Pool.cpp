@@ -2,6 +2,6 @@
 
 int main()
 {
-    sanket::Memory_Pool<sanket::A> mp;
+    sanket::Memory_Pool<sanket::TestType> mp;
     return 0;
 }
