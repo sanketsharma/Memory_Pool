@@ -45,6 +45,7 @@ boost::shared_ptr<A> Memory_Pool::get_from_pool()
     {
         boost::shared_ptr<A> ptr = ptr_list.front();
         ptr_list.pop_front();
+        cond.notify_one();
         return ptr;
     }
     else
@@ -56,8 +57,10 @@ boost::shared_ptr<A> Memory_Pool::get_from_pool()
 
 }
 
-void return_to_pool(boost::shared_ptr<A> )
+void Memory_Pool::return_to_pool(boost::shared_ptr<A> sp)
 {
+    boost::lock_guard<boost::mutex> lock(mut);
+    ptr_list.push_back(sp);
 }
 
 Memory_Pool::Memory_Pool():max_res(10), th(boost::bind(&Memory_Pool::run, this))
